@@ -1,0 +1,132 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Warehouse
+      <small>configuration your warehouse</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-gears"></i> Configuration</a></li>
+      <li class="active">Warehouse</li>
+    </ol>
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="box">
+          <div class="box-body">
+            <button type="button" class="btn btn-app" data-toggle="modal" data-target="#modalAddEditItem"
+              (click)="onAddClick()"><i class="fa fa-plus"></i>Add</button>
+            <button type="button" class="btn btn-app" (click)="onRefreshClick()"><i
+                class=" fa fa-refresh"></i>Refresh</button>
+            <button type="button" class="btn btn-app" (click)="onTestClick()"><i
+                class="fa fa-circle-o"></i>Test</button>
+            <table #mTableData class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <!-- <th>ID</th> -->
+                  <th>Name</th>
+                  <th>Update by</th>
+                  <th>Last update</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of items">
+                  <!-- <td>{{item._id}}</td> -->
+                  <td>{{item.name}}</td>
+                  <td>{{item.upd_by}}</td>
+                  <td>{{item.last_upd_date}}</td>
+                  <td>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-default" (click)="onEditClick(item)" data-toggle="modal"
+                        data-target="#modalAddEditItem"><i class="fa fa-edit"></i> edit</button>
+                      <button type="button" class="btn btn-default" (click)="onDeleteClick(item)" data-toggle="modal"
+                        data-target="#modalDeleteConfirm"><i class="fa fa-trash"></i>
+                        delete</button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+
+  </section>
+  <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+
+<div class="modal fade" id="modalAddEditItem">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form [formGroup]="mFormAddEdit" (ngSubmit)="addEditProcess(mFormAddEdit.value)">
+        <div class="modal-header">
+          <button id="btnModalAddEditItemClose" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">{{mLabelAddEdit}} warehouse</h4>
+        </div>
+        <div class="modal-body">
+          <div class="box-body">
+            <div class="form-group">
+              <label for="labelName">name</label>
+              <input id="name" type="text" formControlName="name" class="form-control" placeholder="Enter name"
+                autofocus autocomplete="off">
+            </div>
+            <div class="form-group">
+              <label for="labelUpdateby">update by</label>
+              <input id="upd_by" type="text" formControlName="upd_by" class="form-control" placeholder="Enter updateby"
+                disabled>
+            </div>
+          </div>
+          <!-- /.box-body -->
+        </div>
+        <div class=" modal-footer">
+          <button type="submit" class="btn btn-primary btn-block"><i [ngClass]="mClassIconAddEdit"></i>
+            {{mLabelAddEdit}}</button>
+          <!-- <button type="submit" class="btn btn-primary btn-block" (click)="addEditProcess()"
+              data-dismiss="modal"><i class="fa fa-plus"></i> {{mLabelAddEdit}}</button> -->
+          <!-- <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button> -->
+        </div>
+      </form>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<div class="modal fade" id="modalDeleteConfirm">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Are you sure to delete <strong>{{mFormAddEdit.value.name}}</strong>?</h4>
+      </div>
+      <div class="modal-footer">
+        <div class="box-body">
+          <button type="button" class="btn btn-danger btn-block" (click)="deleteProcess(mFormAddEdit.value)"
+            data-dismiss="modal"><i class="fa fa-check"></i>
+            Yes</button>
+          <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal"><i class="fa fa-close"></i>
+            No</button>
+        </div>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
