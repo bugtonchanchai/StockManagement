@@ -7,6 +7,6 @@ using following
 
 
 How to run
-1. typing : _**ng serv**_ to run angular framwork
-2. typing : _**node server.js**_ to run node JS as backend
-3. make sure **Mongo DB** running on **27017** port
+1. typing : _`ng serve`_ to run angular framwork
+2. typing : `node server.js` to run node JS as backend
+3. make sure `Mongo DB` running on `27017` port
